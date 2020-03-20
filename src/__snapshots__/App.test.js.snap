@@ -1,0 +1,254 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component renders without crashing 1`] = `
+<div>
+  <div
+    className="makeStyles-container-1"
+  >
+    <div
+      className="makeStyles-container-4"
+    >
+      <div
+        className="makeStyles-internalContainer-5"
+      >
+        <div
+          className="makeStyles-iconContainer-6"
+        >
+          <img
+            alt="Cholo logo"
+            src="githublogo.png"
+          />
+        </div>
+        <div
+          className="makeStyles-textContainer-7"
+        >
+          <h1
+            className="MuiTypography-root-8 MuiTypography-h1-13"
+          >
+
+            Crypto List
+
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="makeStyles-contentContainer-3"
+  >
+    <div
+      className="makeStyles-container-38"
+    >
+      <div
+        className="makeStyles-tableAndFabContainer-39"
+      >
+        <div
+          className="makeStyles-table-40"
+        >
+          <div
+            className="makeStyles-inputandButtonContainer-41"
+          >
+            <div
+              aria-expanded={false}
+              aria-haspopup="listbox"
+              aria-owns="react-autowhatever-1"
+              className="makeStyles-react_autosuggest__container-42"
+              role="combobox"
+            >
+              <input
+                aria-activedescendant={null}
+                aria-autocomplete="list"
+                aria-controls="react-autowhatever-1"
+                autoComplete="off"
+                className="makeStyles-react_autosuggest__input-43"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                placeholder="Start typing your city name"
+                type="text"
+                value=""
+              />
+              <div
+                className="makeStyles-react_autosuggest__suggestions_container-46"
+                id="react-autowhatever-1"
+                role="listbox"
+              />
+            </div>
+            <button
+              className="MuiButtonBase-root-80 MuiButton-root-51 MuiButton-contained-59 MuiButton-containedPrimary-60 MuiButton-containedSizeLarge-71 MuiButton-sizeLarge-73 Mui-disabled Mui-disabled"
+              disabled={true}
+              onBlur={[Function]}
+              onClick={[Function]}
+              onDragLeave={[Function]}
+              onFocus={[Function]}
+              onKeyDown={[Function]}
+              onKeyUp={[Function]}
+              onMouseDown={[Function]}
+              onMouseLeave={[Function]}
+              onMouseUp={[Function]}
+              onTouchEnd={[Function]}
+              onTouchMove={[Function]}
+              onTouchStart={[Function]}
+              tabIndex={-1}
+              type="button"
+            >
+              <span
+                className="MuiButton-label-52"
+              >
+                <h3
+                  className="MuiTypography-root-8 MuiTypography-h3-15"
+                >
+                  Load City Data
+                </h3>
+              </span>
+            </button>
+          </div>
+          <div
+            style={
+              Object {
+                "marginTop": "20px",
+              }
+            }
+          >
+            <ul
+              className="MuiList-root-89 makeStyles-root-83 MuiList-dense-91 MuiList-padding-90"
+            />
+          </div>
+        </div>
+        <div
+          className="MuiTablePagination-root-93"
+        >
+          <div
+            className="MuiToolbar-root-103 MuiToolbar-regular-105 MuiTablePagination-toolbar-94 MuiToolbar-gutters-104"
+          >
+            <div
+              className="MuiTablePagination-spacer-95"
+            />
+            <p
+              className="MuiTypography-root-8 MuiTablePagination-caption-96 MuiTypography-body2-9 MuiTypography-colorInherit-30"
+            >
+              Rows per page:
+            </p>
+            <div
+              className="MuiInputBase-root-117 MuiTablePagination-input-100 MuiTablePagination-selectRoot-97"
+              onClick={[Function]}
+            >
+              <div
+                aria-haspopup="listbox"
+                aria-labelledby=" "
+                className="MuiSelect-root-107 MuiSelect-select-108 MuiTablePagination-select-98 MuiSelect-selectMenu-111 MuiInputBase-input-128"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onMouseDown={[Function]}
+                role="button"
+                tabIndex={0}
+              >
+                10
+              </div>
+              <input
+                onAnimationStart={[Function]}
+                type="hidden"
+                value={10}
+              />
+              <svg
+                aria-hidden="true"
+                className="MuiSvgIcon-root-135 MuiSelect-icon-113 MuiTablePagination-selectIcon-99"
+                focusable="false"
+                role="presentation"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M7 10l5 5 5-5z"
+                />
+              </svg>
+            </div>
+            <p
+              className="MuiTypography-root-8 MuiTablePagination-caption-96 MuiTypography-body2-9 MuiTypography-colorInherit-30"
+            >
+              0-0 of 0
+            </p>
+            <div
+              className="MuiTablePagination-actions-102"
+            >
+              <button
+                aria-label="Previous page"
+                className="MuiButtonBase-root-80 MuiIconButton-root-148 MuiIconButton-colorInherit-151 Mui-disabled Mui-disabled"
+                disabled={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={-1}
+                title="Previous page"
+                type="button"
+              >
+                <span
+                  className="MuiIconButton-label-156"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="MuiSvgIcon-root-135"
+                    focusable="false"
+                    role="presentation"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M15.41 16.09l-4.58-4.59 4.58-4.59L14 5.5l-6 6 6 6z"
+                    />
+                  </svg>
+                </span>
+              </button>
+              <button
+                aria-label="Next page"
+                className="MuiButtonBase-root-80 MuiIconButton-root-148 MuiIconButton-colorInherit-151 Mui-disabled Mui-disabled"
+                disabled={true}
+                onBlur={[Function]}
+                onClick={[Function]}
+                onDragLeave={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseLeave={[Function]}
+                onMouseUp={[Function]}
+                onTouchEnd={[Function]}
+                onTouchMove={[Function]}
+                onTouchStart={[Function]}
+                tabIndex={-1}
+                title="Next page"
+                type="button"
+              >
+                <span
+                  className="MuiIconButton-label-156"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="MuiSvgIcon-root-135"
+                    focusable="false"
+                    role="presentation"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z"
+                    />
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
