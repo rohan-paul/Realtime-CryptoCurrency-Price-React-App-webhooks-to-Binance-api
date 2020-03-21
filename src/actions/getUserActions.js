@@ -5,18 +5,13 @@ import {
   ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
-  SELECTED_TICKER_DATA,
+  LOAD_SELECTED_TICKER_DATA,
+  CURRENT_WEBSOCKET_CONNECTION,
 } from "./types"
 import history from "../history"
 
 import axios from "axios"
 const pick = require("lodash.pick")
-const map = require("lodash.map")
-const partialRight = require("lodash.partialright")
-
-const headers = {
-  "Content-Type": "application/json",
-}
 
 export const handleSnackBarStatus = bool => {
   return {
@@ -33,6 +28,10 @@ export const handleUserCurrencySelection = currency => {
 }
 
 export const loadCurrencyList = () => async dispatch => {
+  dispatch({
+    type: LOADING,
+    payload: true,
+  })
   axios
     .get(`https://api.transak.com/api/v1/currencies/list`)
     .then(res => {
@@ -50,6 +49,7 @@ export const loadCurrencyList = () => async dispatch => {
       })
     })
     .catch(err => {
+      console.log("snackbar status")
       dispatch({
         type: ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
         payload: "Error occurred while loading Initial Currency Data",
@@ -57,40 +57,53 @@ export const loadCurrencyList = () => async dispatch => {
     })
 }
 
-export const getSelectedCurrency = () => async dispatch => {
-  const ws = new WebSocket(`wss://stream.binance.com:9443/ws/ethusdt@ticker`)
-  ws.onopen = () => {
-    console.log("Connected to WebSocket")
-  }
-  ws.onmessage = event => {
-    console.log(
-      "Recd from WebSocket in Action ",
-      pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
+// A function to return the websocket response as a Promise
+const connect = ticker => {
+  return new Promise((resolve, reject) => {
+    let server = new WebSocket(
+      `wss://stream.binance.com:9443/ws/${ticker}usdt@ticker`,
     )
-
-    dispatch({
-      type: SELECTED_TICKER_DATA,
-      payload: [pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"])],
-    })
-  }
-  history.push("/table")
+    server.onopen = () => {
+      resolve(server)
+    }
+    server.onerror = err => {
+      console.log("ERROR FETCHING TICKER", err)
+      reject(err)
+    }
+  })
 }
 
-// Util function to merge to topUsers array data with userProfiles array, as they are coming from two different api calls
-const mergeArraysConditionally = (topUsers, userProfiles) => {
-  let merged = []
+export const getSelectedCurrency = ticker => async dispatch => {
+  dispatch({
+    type: LOADING,
+    payload: true,
+  })
 
-  // First return the first array with only elements whose id matches with an element's id from the second array
-  topUsers.every(i =>
-    userProfiles.map(j => j.id).includes(i.id) ? merged.push(i) : null,
-  )
-
-  // Now that I have got two separate arrays of matched and the original array, simply merge the matched array (on the basis of ID) with the original array containing the data.
-  merged = merged.map(i =>
-    Object.assign(
-      i,
-      userProfiles.find(j => j.id === i.id),
-    ),
-  )
-  return merged
+  connect(ticker)
+    .then(server => {
+      const currentSocket = server
+      // console.log("webSocket.current ", server)
+      server.onmessage = event => {
+        console.log(
+          "payload ",
+          pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
+        )
+        dispatch({
+          type: LOAD_SELECTED_TICKER_DATA,
+          payload: {
+            tickerData: [
+              pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
+            ],
+            current_websocket_connection: server,
+          },
+        })
+      }
+      history.push("/table")
+    })
+    .catch(err => {
+      dispatch({
+        type: ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
+        payload: "Error occurred while loading selected ticker Data",
+      })
+    })
 }

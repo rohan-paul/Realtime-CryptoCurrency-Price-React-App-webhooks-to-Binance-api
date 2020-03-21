@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-underscore-dangle */
-import React, { useState } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import PropTypes from "prop-types"
 import TableContainer from "@material-ui/core/TableContainer"
@@ -15,32 +15,25 @@ import TableRowHead from "./TableRowHead"
 import TableRow from "./ThisTableRow"
 import TableToolbar from "./TableToolbar"
 import { useStyles } from "./Styles"
-
-// const tableToRender = [
-//   {
-//     s: "ETHUSDT",
-//     c: "128.01000000",
-//     h: "152.55000000",
-//     l: "116.74000000",
-//     v: "2288718.42508000",
-//     n: 679454,
-//   },
-// ]
+import GlobalSnackbar from "../../components_libs/GlobalSnackbar"
+import { handleSnackBarStatus } from "../../actions/getUserActions"
 
 const CryptoTable = () => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
   const classes = useStyles()
-  // const tableToRender = globalStore.selected_ticker_data
 
   const [order, setOrder] = React.useState({
     field: "name",
     direction: "asc",
   })
   const [selected, setSelected] = useState([])
-  const [initialLoadingErrSnackbar, setInitialLoadingErrSnackbar] = useState(
-    false,
-  )
+  const webSocket = useRef(null)
+  // const [initialLoadingErrSnackbar, setInitialLoadingErrSnackbar] = useState(
+  //   false,
+  // )
+
+  const closeSnackbar = () => dispatch(handleSnackBarStatus(false))
 
   const onOrderChange = property =>
     setOrder({
@@ -63,11 +56,25 @@ const CryptoTable = () => {
 
   let tableToRender = globalStore.selected_ticker_data
 
+  // this useEffect is only to close the websocket connection when componnt unmounts
+  useEffect(() => {
+    webSocket.current = globalStore.current_websocket_connection
+    return () => {
+      if (webSocket.current) {
+        webSocket.current.close()
+      }
+    }
+  }, [globalStore.current_websocket_connection])
+
+  // webSocket.current = globalStore.current_websocket_connection
+
   return (
     <div className={classes.container}>
-      {/* {console.log('ALL SELECTED ', JSON.stringify(selected))}
-       */}
       {/* {console.log("TICKER DATA ", globalStore.selected_ticker_data)} */}
+      {console.log(
+        "webSocket.current ",
+        globalStore.current_websocket_connection,
+      )}
 
       <div className={classes.tableAndFabContainer}>
         {globalStore.loading ? (
@@ -113,6 +120,17 @@ const CryptoTable = () => {
             </TableContainer>
           </div>
         )}
+        <GlobalSnackbar
+          open={
+            globalStore.snackbar ||
+            typeof globalStore.snackbar === "object" ||
+            typeof globalStore.snackbar === "string" ||
+            globalStore.snackbar instanceof String
+          }
+          variant="error"
+          message={globalStore.error_while_fetching_initial_currency_list}
+          onClose={closeSnackbar}
+        />
       </div>
     </div>
   )

@@ -5,6 +5,11 @@ const useStyles = makeStyles(theme => ({
   container: {
     margin: "auto",
     backgroundColor: theme.background.default,
+    textAlign: "center",
+  },
+
+  tableAndFabContainer: {
+    textAlign: "center",
   },
 
   tableContainer: {
@@ -30,7 +35,6 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: "4px",
   },
   spinner: {
-    width: "1400px",
     height: "calc(100vh - 100px)",
   },
 }))

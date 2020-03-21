@@ -1,8 +1,8 @@
-import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Snackbar from '@material-ui/core/Snackbar'
-import PropTypes from 'prop-types'
-import AppSnackbarContent from './AppSnackbarContent'
+import React from "react"
+import { makeStyles } from "@material-ui/core/styles"
+import Snackbar from "@material-ui/core/Snackbar"
+import PropTypes from "prop-types"
+import AppSnackbarContent from "./AppSnackbarContent"
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -16,11 +16,11 @@ const GlobalSnackbar = ({ open, onClose, message, variant }) => {
   return (
     <Snackbar
       anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'left',
+        vertical: "bottom",
+        horizontal: "left",
       }}
       open={open}
-      autoHideDuration={8000}
+      autoHideDuration={6000}
       onClose={onClose}
     >
       <AppSnackbarContent
@@ -36,8 +36,8 @@ const GlobalSnackbar = ({ open, onClose, message, variant }) => {
 GlobalSnackbar.defaultProps = {
   open: false,
   onClose: () => {},
-  message: 'Unknown error',
-  variant: 'warning',
+  message: "Unknown error",
+  variant: "warning",
 }
 
 GlobalSnackbar.propTypes = {

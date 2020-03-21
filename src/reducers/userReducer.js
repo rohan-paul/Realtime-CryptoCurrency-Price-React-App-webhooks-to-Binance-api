@@ -4,7 +4,8 @@ import {
   ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
-  SELECTED_TICKER_DATA,
+  LOAD_SELECTED_TICKER_DATA,
+  CURRENT_WEBSOCKET_CONNECTION,
 } from "../actions/types"
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   user_selected_currency: "",
   selected_ticker_data: [],
   snackbar: false,
+  current_websocket_connection: null,
 }
 
 export default (state = initialState, actions) => {
@@ -35,6 +37,7 @@ export default (state = initialState, actions) => {
       // console.log("curr list in reducer ", actions.payload)
       return {
         ...state,
+        loading: false,
         currencyList: actions.payload,
       }
 
@@ -42,16 +45,20 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         snackbar: true,
+        error_while_fetching_initial_currency_list: actions.payload,
       }
     case USER_SELECTED_CURRENCY:
       return {
         ...state,
         user_selected_currency: actions.payload,
       }
-    case SELECTED_TICKER_DATA:
+    case LOAD_SELECTED_TICKER_DATA:
       return {
         ...state,
-        selected_ticker_data: actions.payload,
+        loading: false,
+        selected_ticker_data: actions.payload.tickerData,
+        current_websocket_connection:
+          actions.payload.current_websocket_connection,
       }
 
     default:
