@@ -23,12 +23,9 @@ const CryptoList = () => {
   const classes = useStyles()
   const [isClearable, setisClearable] = useState(true)
 
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(10)
-
   useEffect(() => {
     dispatch(loadCurrencyList())
-  }, [dispatch, page, rowsPerPage])
+  }, [dispatch])
 
   const toggleClearable = () =>
     this.setState(state => ({ isClearable: !state.isClearable }))

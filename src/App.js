@@ -7,6 +7,7 @@ import CryptoList from "./containers/CryptoList"
 import PageHeader from "./components_libs/PageHeader"
 import globalTheme from "./globalTheme"
 import NotFound from "./containers/NotFound"
+import CryptoTable from "./containers/CryptoTable"
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -36,6 +37,7 @@ const App = () => {
             <div className={classes.contentContainer}>
               <Switch>
                 <Route exact path="/" component={CryptoList} />
+                <Route exact path="/table" component={CryptoTable} />
                 <Route component={NotFound} />
               </Switch>
             </div>

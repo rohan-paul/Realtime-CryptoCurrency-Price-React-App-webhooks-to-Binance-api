@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles(theme => ({
   container: {
     margin: "auto",
     backgroundColor: theme.background.default,
-  },
-  tableAndFabContainer: {
-    position: "relative",
-    margin: "auto",
-    maxWidth: "1400px",
-    minHeight: "calc(100vh - 100px)",
-    alignItems: "center ",
-    justifyContent: "centert",
-    verticalAlign: "middle t",
-    textAlign: "center",
   },
   table: {
     backgroundColor: theme.background.paper,
@@ -25,7 +15,6 @@ const useStyles = makeStyles(theme => ({
     verticalAlign: "middle ",
     textAlign: "center",
   },
-
   inputandButtonContainer: {
     display: "flex",
     flexDirection: "row",

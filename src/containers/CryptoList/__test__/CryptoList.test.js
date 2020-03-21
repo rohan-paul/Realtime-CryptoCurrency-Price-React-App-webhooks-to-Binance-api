@@ -2,7 +2,6 @@ import React from "react"
 import renderer from "react-test-renderer"
 import { MuiThemeProvider } from "@material-ui/core/styles"
 import globalTheme from "../../../globalTheme"
-import PropTypes from "prop-types"
 import { mount, shallow } from "enzyme"
 import expect from "expect"
 import { createShallow, createMount } from "@material-ui/core/test-utils"
@@ -10,17 +9,10 @@ import configureMockStore from "redux-mock-store"
 import thunk from "redux-thunk"
 import { Provider } from "react-redux"
 import CryptoList from "../CryptoList"
-import EachUserListItem from "../EachUserListItem"
-import {
-  handleCityToSearchChange,
-  handleSnackBarStatus,
-} from "../../../actions/getUserActions"
 import Button from "@material-ui/core/Button"
-import { useDispatch } from "react-redux"
 import * as Redux from "react-redux"
 import { Action } from "redux"
 import Autosuggest from "react-autosuggest"
-import TablePagination from "@material-ui/core/TablePagination"
 
 const middlewares = [thunk] // add your middlewares like `redux-thunk`
 const mockStore = configureMockStore(middlewares)
