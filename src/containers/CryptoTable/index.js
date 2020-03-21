@@ -16,29 +16,22 @@ import TableRow from "./ThisTableRow"
 import TableToolbar from "./TableToolbar"
 import { useStyles } from "./Styles"
 
-const tableToRender = [
-  {
-    pair: "ETHBTC",
-    lastPrice: 0.0221212,
-    _24hHigh: 0.0234568,
-    _24hLow: 0.231012154,
-    _24hVolume: 9022.83,
-    totalTrades: 176944,
-  },
-  {
-    pair: "FIATHBTC",
-    lastPrice: 0.0221212,
-    _24hHigh: 0.0234568,
-    _24hLow: 0.231012154,
-    _24hVolume: 9022.83,
-    totalTrades: 176944,
-  },
-]
+// const tableToRender = [
+//   {
+//     s: "ETHUSDT",
+//     c: "128.01000000",
+//     h: "152.55000000",
+//     l: "116.74000000",
+//     v: "2288718.42508000",
+//     n: 679454,
+//   },
+// ]
 
 const CryptoTable = () => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
   const classes = useStyles()
+  // const tableToRender = globalStore.selected_ticker_data
 
   const [order, setOrder] = React.useState({
     field: "name",
@@ -68,10 +61,13 @@ const CryptoTable = () => {
     setSelected([...selected])
   }
 
+  let tableToRender = globalStore.selected_ticker_data
+
   return (
     <div className={classes.container}>
       {/* {console.log('ALL SELECTED ', JSON.stringify(selected))}
-      {console.log('ROUTE NAME ', window.location.pathname)} */}
+       */}
+      {/* {console.log("TICKER DATA ", globalStore.selected_ticker_data)} */}
 
       <div className={classes.tableAndFabContainer}>
         {globalStore.loading ? (
@@ -99,6 +95,7 @@ const CryptoTable = () => {
                       [order.direction],
                     ).map(thisItem => (
                       <TableRow
+                        key={thisItem.pair}
                         thisItem={thisItem}
                         selectedItems={selected.filter(
                           i => i._id === thisItem._id,
@@ -122,7 +119,7 @@ const CryptoTable = () => {
 }
 
 CryptoTable.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onClose: PropTypes.func,
 }
 
 export default CryptoTable

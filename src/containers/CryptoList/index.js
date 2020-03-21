@@ -12,6 +12,7 @@ import {
   loadCurrencyList,
   handleUserCurrencySelection,
   handleSnackBarStatus,
+  getSelectedCurrency,
 } from "../../actions/getUserActions"
 import Button from "@material-ui/core/Button"
 import { useStyles } from "./Styles"
@@ -59,7 +60,7 @@ const CryptoList = () => {
                 getOptionValue={option => option.value}
               />
               <Button
-                // onClick={loadAllData}
+                onClick={() => dispatch(getSelectedCurrency())}
                 className={classes.button}
                 variant="contained"
                 size="large"
@@ -74,11 +75,6 @@ const CryptoList = () => {
                 </Typography>
               </Button>
             </div>
-            {/* <div style={{ marginTop: "20px" }}>
-              <EachUserListItem
-                currentCityShown={currentCityShown}
-              ></EachUserListItem>
-            </div> */}
           </div>
         )}
 

@@ -4,6 +4,7 @@ import {
   ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
+  SELECTED_TICKER_DATA,
 } from "../actions/types"
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   error_while_fetching_initial_currency_list: false,
   error_while_fetching_initial_data: false,
   user_selected_currency: "",
+  selected_ticker_data: [],
   snackbar: false,
 }
 
@@ -30,7 +32,7 @@ export default (state = initialState, actions) => {
       }
 
     case LOAD_CURRENCY_LIST:
-      console.log("curr list in reducer ", actions.payload)
+      // console.log("curr list in reducer ", actions.payload)
       return {
         ...state,
         currencyList: actions.payload,
@@ -45,6 +47,11 @@ export default (state = initialState, actions) => {
       return {
         ...state,
         user_selected_currency: actions.payload,
+      }
+    case SELECTED_TICKER_DATA:
+      return {
+        ...state,
+        selected_ticker_data: actions.payload,
       }
 
     default:

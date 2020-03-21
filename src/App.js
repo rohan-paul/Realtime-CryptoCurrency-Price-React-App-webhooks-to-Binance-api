@@ -37,7 +37,7 @@ const App = () => {
             <div className={classes.contentContainer}>
               <Switch>
                 <Route exact path="/" component={CryptoList} />
-                <Route exact path="/table" component={CryptoTable} />
+                <Route path="/table" component={CryptoTable} />
                 <Route component={NotFound} />
               </Switch>
             </div>

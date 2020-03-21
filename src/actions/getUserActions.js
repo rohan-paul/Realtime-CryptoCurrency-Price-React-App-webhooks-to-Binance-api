@@ -5,7 +5,9 @@ import {
   ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
+  SELECTED_TICKER_DATA,
 } from "./types"
+import history from "../history"
 
 import axios from "axios"
 const pick = require("lodash.pick")
@@ -53,6 +55,25 @@ export const loadCurrencyList = () => async dispatch => {
         payload: "Error occurred while loading Initial Currency Data",
       })
     })
+}
+
+export const getSelectedCurrency = () => async dispatch => {
+  const ws = new WebSocket(`wss://stream.binance.com:9443/ws/ethusdt@ticker`)
+  ws.onopen = () => {
+    console.log("Connected to WebSocket")
+  }
+  ws.onmessage = event => {
+    console.log(
+      "Recd from WebSocket in Action ",
+      pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
+    )
+
+    dispatch({
+      type: SELECTED_TICKER_DATA,
+      payload: [pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"])],
+    })
+  }
+  history.push("/table")
 }
 
 // Util function to merge to topUsers array data with userProfiles array, as they are coming from two different api calls
