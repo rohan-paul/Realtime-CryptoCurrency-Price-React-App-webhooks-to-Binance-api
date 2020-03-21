@@ -6,7 +6,6 @@ import {
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
   LOAD_SELECTED_TICKER_DATA,
-  CURRENT_WEBSOCKET_CONNECTION,
 } from "./types"
 import history from "../history"
 
@@ -49,7 +48,6 @@ export const loadCurrencyList = () => async dispatch => {
       })
     })
     .catch(err => {
-      console.log("snackbar status")
       dispatch({
         type: ERROR_WHILE_FETCHING_INITIAL_CURRENCY_LIST,
         payload: "Error occurred while loading Initial Currency Data",
@@ -67,7 +65,6 @@ const connect = ticker => {
       resolve(server)
     }
     server.onerror = err => {
-      console.log("ERROR FETCHING TICKER", err)
       reject(err)
     }
   })
@@ -81,13 +78,11 @@ export const getSelectedCurrency = ticker => async dispatch => {
 
   connect(ticker)
     .then(server => {
-      const currentSocket = server
-      // console.log("webSocket.current ", server)
       server.onmessage = event => {
-        console.log(
-          "payload ",
-          pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
-        )
+        // console.log(
+        //   "payload ",
+        //   pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
+        // )
         dispatch({
           type: LOAD_SELECTED_TICKER_DATA,
           payload: {

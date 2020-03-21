@@ -9,7 +9,6 @@ import TableContainer from "@material-ui/core/TableContainer"
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"
 import { orderBy } from "lodash"
-import { Typography } from "@material-ui/core"
 import LoadingSpinner from "../../components_libs/LoadingSpinner"
 import TableRowHead from "./TableRowHead"
 import TableRow from "./ThisTableRow"
@@ -29,9 +28,6 @@ const CryptoTable = () => {
   })
   const [selected, setSelected] = useState([])
   const webSocket = useRef(null)
-  // const [initialLoadingErrSnackbar, setInitialLoadingErrSnackbar] = useState(
-  //   false,
-  // )
 
   const closeSnackbar = () => dispatch(handleSnackBarStatus(false))
 
@@ -56,7 +52,7 @@ const CryptoTable = () => {
 
   let tableToRender = globalStore.selected_ticker_data
 
-  // this useEffect is only to close the websocket connection when componnt unmounts
+  // this useEffect is only to close the websocket connection when component unmounts
   useEffect(() => {
     webSocket.current = globalStore.current_websocket_connection
     return () => {
@@ -66,15 +62,13 @@ const CryptoTable = () => {
     }
   }, [globalStore.current_websocket_connection])
 
-  // webSocket.current = globalStore.current_websocket_connection
-
   return (
     <div className={classes.container}>
       {/* {console.log("TICKER DATA ", globalStore.selected_ticker_data)} */}
-      {console.log(
+      {/* {console.log(
         "webSocket.current ",
         globalStore.current_websocket_connection,
-      )}
+      )} */}
 
       <div className={classes.tableAndFabContainer}>
         {globalStore.loading ? (

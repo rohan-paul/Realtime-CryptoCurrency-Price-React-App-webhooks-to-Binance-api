@@ -22,7 +22,6 @@ const CryptoList = () => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
   const classes = useStyles()
-  // const [isClearable, setisClearable] = useState(true)
   const webSocket = useRef(null)
 
   useEffect(() => {

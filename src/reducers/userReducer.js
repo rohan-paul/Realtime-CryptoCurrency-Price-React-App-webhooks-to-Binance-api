@@ -5,7 +5,6 @@ import {
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
   LOAD_SELECTED_TICKER_DATA,
-  CURRENT_WEBSOCKET_CONNECTION,
 } from "../actions/types"
 
 const initialState = {
@@ -53,6 +52,7 @@ export default (state = initialState, actions) => {
         user_selected_currency: actions.payload,
       }
     case LOAD_SELECTED_TICKER_DATA:
+      console.log("Actions Payload ", actions.payload.tickerData)
       return {
         ...state,
         loading: false,
