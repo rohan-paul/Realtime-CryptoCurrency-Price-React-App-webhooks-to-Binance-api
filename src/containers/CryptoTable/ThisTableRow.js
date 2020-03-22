@@ -42,7 +42,6 @@ const ThisTableRow = ({ thisItem, selected, onSelected, selectedItems }) => {
       key={thisItem._id}
       selected={selected}
     >
-      {/* {console.log('SELECTED IN TABLE ROW ', JSON.stringify(selectedItems[0]))} */}
       <TableCell padding="checkbox" className={classes.tableCell}>
         <Checkbox
           color="primary"

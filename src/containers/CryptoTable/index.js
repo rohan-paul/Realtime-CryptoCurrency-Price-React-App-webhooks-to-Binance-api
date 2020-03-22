@@ -64,12 +64,6 @@ const CryptoTable = () => {
 
   return (
     <div className={classes.container}>
-      {/* {console.log("TICKER DATA ", globalStore.selected_ticker_data)} */}
-      {/* {console.log(
-        "webSocket.current ",
-        globalStore.current_websocket_connection,
-      )} */}
-
       <div className={classes.tableAndFabContainer}>
         {globalStore.loading ? (
           <div className={classes.spinner}>
@@ -104,9 +98,7 @@ const CryptoTable = () => {
                         selected={isSelected(thisItem)}
                         onSelected={updateSelected}
                         key={thisItem._id || thisItem.name}
-                      >
-                        {/* {console.log('CURRENT VALUE ', thisItem)} */}
-                      </TableRow>
+                      ></TableRow>
                     ))}
                   </TableBody>
                 </Table>

@@ -1,25 +1,18 @@
-##### The LIVE site running [here](https://popular-github-user.netlify.com/)
+##### The LIVE site running [here](https://realtime-cryptocurrency-price.netlify.com/)
 
 Its built with React, Redux and Material-UI.
 
-<img src="./search-most-popular-github-users.gif">
+<img src="./realtime-cryptocurrency-price.gif">
 
-#### To launch the project locally
+#### To launch the project locally first git clone and then in the root directory
 
 `yarn install` and then
 
 `yarn start`
 
-#### Available Scripts
-
-In the project directory, you can run:
-
-#### `yarn start`
-
-Runs the app in the development mode.<br />
+This will run the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-#### `yarn test` or `npm test`
+#### To run the tests (there are around 12 passing tests)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`yarn test`

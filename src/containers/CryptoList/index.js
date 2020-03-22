@@ -75,14 +75,12 @@ const CryptoList = () => {
 
   return (
     <div className={classes.container}>
-      {/* {console.log(JSON.stringify(globalStore.currencyList))} */}
       {globalStore.loading ? (
         <div className={classes.spinner}>
           <LoadingSpinner />
         </div>
       ) : (
         <div className={classes.table}>
-          {/* {console.log("SNACKBAR ", globalStore.snackbar)} */}
           <div className={classes.inputandButtonContainer}>
             <Select
               onChange={handleInputChange}

@@ -26,14 +26,12 @@ export default (state = initialState, actions) => {
         loading: actions.payload,
       }
     case SNACKBAR_STATUS:
-      console.log("SNACKBAR COMING TO REDUCER ", actions.payload)
       return {
         ...state,
         snackbar: actions.payload,
       }
 
     case LOAD_CURRENCY_LIST:
-      // console.log("curr list in reducer ", actions.payload)
       return {
         ...state,
         loading: false,
@@ -52,7 +50,6 @@ export default (state = initialState, actions) => {
         user_selected_currency: actions.payload,
       }
     case LOAD_SELECTED_TICKER_DATA:
-      console.log("Actions Payload ", actions.payload.tickerData)
       return {
         ...state,
         loading: false,

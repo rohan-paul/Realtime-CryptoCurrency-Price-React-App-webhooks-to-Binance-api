@@ -98,7 +98,6 @@ describe("CryptoList Component", () => {
         </MuiThemeProvider>
       </Provider>,
     )
-    console.log("WRAPPER IS ", wrapper.find("Select").length)
     expect(wrapper.find("Select").length).toEqual(1)
   })
 })
