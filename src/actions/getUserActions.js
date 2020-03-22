@@ -1,4 +1,5 @@
 /* eslint-disable import/prefer-default-export */
+import React, { useEffect, useState, useRef } from "react"
 import {
   LOADING,
   LOAD_CURRENCY_LIST,
@@ -36,9 +37,21 @@ export const loadCurrencyList = () => async dispatch => {
     .then(res => {
       const options = Object.entries(res.data.response.cryptocurrencies).map(
         e => {
+          const image = require(`../assets/images/${e[0]}.png`)
           return {
             value: e[0],
-            label: e[1].name,
+            label: (
+              <>
+                <img
+                  src={image}
+                  alt=""
+                  height="20px"
+                  width="20px"
+                  style={{ marginRight: "15px" }}
+                />
+                {e[1].name}
+              </>
+            ),
           }
         },
       )
@@ -79,10 +92,6 @@ export const getSelectedCurrency = ticker => async dispatch => {
   connect(ticker)
     .then(server => {
       server.onmessage = event => {
-        // console.log(
-        //   "payload ",
-        //   pick(JSON.parse(event.data), ["s", "c", "h", "l", "v", "n"]),
-        // )
         dispatch({
           type: LOAD_SELECTED_TICKER_DATA,
           payload: {

@@ -26,6 +26,8 @@ const useStyles = makeStyles(theme => ({
     marginRight: "10px",
     width: "55%",
     height: "50px",
+    textAlign: "left",
+    alignItems: "left",
   },
   button: {
     marginTop: "20px",
