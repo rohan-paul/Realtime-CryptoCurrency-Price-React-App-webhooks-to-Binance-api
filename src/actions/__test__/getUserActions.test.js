@@ -25,25 +25,4 @@ describe("User Signup Actions Tests", () => {
       payload: "ETH",
     })
   })
-
-  // it("should getSelectedCurrency correctly ", () => {
-  //   const expectedPayload = {
-  //     tickerData: [
-  //       {
-  //         s: "ETHUSDT",
-  //         c: "128.01000000",
-  //         h: "152.55000000",
-  //         l: "116.74000000",
-  //         v: "2288718.42508000",
-  //         n: 679454,
-  //       },
-  //     ],
-  //     current_websocket_connection: WebSocket,
-  //   }
-  //   const getSelectedCurrencyPayload = getUserActions.getSelectedCurrency("eth")
-  //   expect(getSelectedCurrencyPayload).toEqual({
-  //     type: "LOAD_SELECTED_TICKER_DATA",
-  //     payload: expectedPayload,
-  //   })
-  // })
 })

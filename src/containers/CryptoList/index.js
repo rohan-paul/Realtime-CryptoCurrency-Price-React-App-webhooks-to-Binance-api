@@ -45,39 +45,31 @@ const CryptoList = () => {
           <LoadingSpinner />
         </div>
       ) : (
-        <div className={classes.tableAndFabContainer}>
-          {globalStore.loading ? (
-            <div className={classes.spinner}>
-              <LoadingSpinner />
-            </div>
-          ) : (
-            <div className={classes.table}>
-              {/* {console.log("SNACKBAR ", globalStore.snackbar)} */}
-              <div className={classes.inputandButtonContainer}>
-                <Select
-                  onChange={handleInputChange}
-                  className={classes.selectionBox}
-                  isClearable
-                  options={globalStore.currencyList}
-                  getOptionLabel={option => option.label}
-                  getOptionValue={option => option["value"]}
-                />
-                <Button
-                  onClick={() => {
-                    dispatch(getSelectedCurrency(ticker))
-                    webSocket.current = globalStore.current_websocket_connection
-                  }}
-                  className={classes.button}
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  disabled={globalStore.user_selected_currency === ""}
-                >
-                  <Typography variant="h3">Proceed</Typography>
-                </Button>
-              </div>
-            </div>
-          )}
+        <div className={classes.table}>
+          {/* {console.log("SNACKBAR ", globalStore.snackbar)} */}
+          <div className={classes.inputandButtonContainer}>
+            <Select
+              onChange={handleInputChange}
+              className={classes.selectionBox}
+              isClearable
+              options={globalStore.currencyList}
+              getOptionLabel={option => option.label}
+              getOptionValue={option => option["value"]}
+            />
+            <Button
+              onClick={() => {
+                dispatch(getSelectedCurrency(ticker))
+                webSocket.current = globalStore.current_websocket_connection
+              }}
+              className={classes.button}
+              variant="contained"
+              size="large"
+              color="primary"
+              disabled={globalStore.user_selected_currency === ""}
+            >
+              <Typography variant="h3">Proceed</Typography>
+            </Button>
+          </div>
         </div>
       )}
       <GlobalSnackbar
