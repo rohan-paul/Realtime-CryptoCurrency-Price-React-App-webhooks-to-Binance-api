@@ -117,7 +117,7 @@ const convertArrToObjBids = arr => {
   return arr
     .filter(item => parseInt(item[1]) !== 0)
     .sort((a, b) => a[0] > b[0])
-    .slice(0, 8)
+    .slice(-8)
     .map(i => {
       return {
         p: i[0],
@@ -130,7 +130,7 @@ const convertArrToObjAsk = arr => {
   return arr
     .filter(item => parseInt(item[1]) !== 0)
     .sort((a, b) => a[0] < b[0])
-    .slice(0, 8)
+    .slice(-8)
     .map(i => {
       return {
         p: i[0],
@@ -139,7 +139,7 @@ const convertArrToObjAsk = arr => {
     })
 }
 
-export const getOrderBook = ticker => async dispatch => {
+/* export const getOrderBook = ticker => async dispatch => {
   const url = `wss://stream.binance.com:9443/ws/${ticker}btc@depth`
 
   let orderBook = new WebSocket(url)
@@ -156,4 +156,44 @@ export const getOrderBook = ticker => async dispatch => {
       },
     })
   }
+}
+ */
+
+export const getOrderBook = ticker => async dispatch => {
+  const upperCaseTicker = ticker.toUpperCase()
+
+  const snapshotURL = `depth?symbol=${upperCaseTicker}BTC&limit=1000`
+
+  axios
+    .get(snapshotURL)
+    .then(res => {
+      const snapshotBids = res.data.bids
+      const snapshotAsks = res.data.asks
+
+      const url = `wss://stream.binance.com:9443/ws/${ticker}btc@depth`
+
+      let orderBook = new WebSocket(url)
+
+      orderBook.onmessage = event => {
+        const b = JSON.parse(event.data).b
+        const a = JSON.parse(event.data).a
+        // console.log("WEBSOCKET A IS ", a)
+        const mergedBidsOrder = [...snapshotBids, ...b]
+        const mergedAsksOrder = [...snapshotAsks, ...a]
+
+        // console.log("mergedBidsOrder IS ", mergedBidsOrder)
+
+        dispatch({
+          type: LOAD_ORDER_BOOK_DATA,
+          payload: {
+            buyOrder_websocket_connection: orderBook,
+            buy: convertArrToObjBids(mergedBidsOrder),
+            sell: convertArrToObjAsk(mergedAsksOrder),
+          },
+        })
+      }
+    })
+    .catch(e => {
+      console.log("Error occured while fetching Snapshot data")
+    })
 }

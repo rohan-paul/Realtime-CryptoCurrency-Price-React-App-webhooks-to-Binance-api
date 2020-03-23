@@ -1,6 +1,7 @@
 {
   "name": "mainwip",
   "version": "0.1.0",
+  "proxy": "https://www.binance.com/api/v1/",
   "private": true,
   "type": "module",
   "dependencies": {
