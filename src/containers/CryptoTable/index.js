@@ -53,7 +53,7 @@ const CryptoTable = () => {
 
   let tableToRender = globalStore.selected_ticker_data
 
-  // this useEffect is only to close the websocket connection when component unmounts
+  // this useEffect is only to close the websocket connection when component un-mounts
   useEffect(() => {
     // first store the websocket value in ref.current when component mounts
     webSocket.current = globalStore.current_websocket_connection
@@ -61,9 +61,9 @@ const CryptoTable = () => {
     return () => {
       if (webSocket.current) {
         webSocket.current.close()
-        if (buyOrderWebSocket.current) {
-          buyOrderWebSocket.current.close()
-        }
+      }
+      if (buyOrderWebSocket.current) {
+        buyOrderWebSocket.current.close()
       }
     }
   }, [
@@ -115,95 +115,98 @@ const CryptoTable = () => {
           </div>
         )}
       </div>
-      <div>BUY</div>
-      <div className={classes.tableAndFabContainer}>
-        {globalStore.loading ? (
-          <div className={classes.spinner}>
-            <LoadingSpinner />
-          </div>
-        ) : (
-          <div>
-            <TableToolbar selected={selected} />
-            <TableContainer className={classes.tableContainer}>
-              <div className={classes.innerTableContainer}>
-                <Table stickyHeader className={classes.table}>
-                  <TableRowHead
-                    isBuySell
-                    selectedCurrencies={globalStore.order_book_buy_data}
-                    selected={selected}
-                    order={order}
-                    onOrderChange={onOrderChange}
-                    setSelected={setSelected}
-                  />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div className={classes.tableAndFabContainer}>
+          <div>BIDS</div>
+          {globalStore.loading ? (
+            <div className={classes.spinner}>
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <div>
+              <TableToolbar selected={selected} />
+              <TableContainer className={classes.tableContainer}>
+                <div className={classes.innerTableContainer}>
+                  <Table stickyHeader className={classes.table}>
+                    <TableRowHead
+                      isBuySell
+                      selectedCurrencies={globalStore.order_book_buy_data}
+                      selected={selected}
+                      order={order}
+                      onOrderChange={onOrderChange}
+                      setSelected={setSelected}
+                    />
 
-                  <TableBody>
-                    {orderBy(
-                      globalStore.order_book_buy_data,
-                      [order.field],
-                      [order.direction],
-                    ).map(thisItem => (
-                      <ThisTableRow
-                        isBuySell
-                        key={thisItem.pair}
-                        thisItem={thisItem}
-                        selectedItems={selected.filter(
-                          i => i._id === thisItem._id,
-                        )}
-                        selected={isSelected(thisItem)}
-                        onSelected={updateSelected}
-                      ></ThisTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </TableContainer>
-          </div>
-        )}
-      </div>
-      <div>SELL</div>
-      <div className={classes.tableAndFabContainer}>
-        {globalStore.loading ? (
-          <div className={classes.spinner}>
-            <LoadingSpinner />
-          </div>
-        ) : (
-          <div>
-            <TableToolbar selected={selected} />
-            <TableContainer className={classes.tableContainer}>
-              <div className={classes.innerTableContainer}>
-                <Table stickyHeader className={classes.table}>
-                  <TableRowHead
-                    isBuySell
-                    selectedCurrencies={globalStore.order_book_buy_data}
-                    selected={selected}
-                    order={order}
-                    onOrderChange={onOrderChange}
-                    setSelected={setSelected}
-                  />
+                    <TableBody>
+                      {orderBy(
+                        globalStore.order_book_buy_data,
+                        [order.field],
+                        [order.direction],
+                      ).map(thisItem => (
+                        <ThisTableRow
+                          isBuySell
+                          key={thisItem.pair}
+                          thisItem={thisItem}
+                          selectedItems={selected.filter(
+                            i => i._id === thisItem._id,
+                          )}
+                          selected={isSelected(thisItem)}
+                          onSelected={updateSelected}
+                        ></ThisTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </TableContainer>
+            </div>
+          )}
+        </div>
 
-                  <TableBody>
-                    {orderBy(
-                      globalStore.order_book_buy_data,
-                      [order.field],
-                      [order.direction],
-                    ).map(thisItem => (
-                      <ThisTableRow
-                        isBuySell
-                        key={thisItem.pair}
-                        thisItem={thisItem}
-                        selectedItems={selected.filter(
-                          i => i._id === thisItem._id,
-                        )}
-                        selected={isSelected(thisItem)}
-                        onSelected={updateSelected}
-                      ></ThisTableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </TableContainer>
-          </div>
-        )}
+        <div className={classes.tableAndFabContainer}>
+          <div>ASKS</div>
+          {globalStore.loading ? (
+            <div className={classes.spinner}>
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <div>
+              <TableToolbar selected={selected} />
+              <TableContainer className={classes.tableContainer}>
+                <div className={classes.innerTableContainer}>
+                  <Table stickyHeader className={classes.table}>
+                    <TableRowHead
+                      isBuySell
+                      selectedCurrencies={globalStore.order_book_sell_data}
+                      selected={selected}
+                      order={order}
+                      onOrderChange={onOrderChange}
+                      setSelected={setSelected}
+                    />
+
+                    <TableBody>
+                      {orderBy(
+                        globalStore.order_book_sell_data,
+                        [order.field],
+                        [order.direction],
+                      ).map(thisItem => (
+                        <ThisTableRow
+                          isBuySell
+                          key={thisItem.pair}
+                          thisItem={thisItem}
+                          selectedItems={selected.filter(
+                            i => i._id === thisItem._id,
+                          )}
+                          selected={isSelected(thisItem)}
+                          onSelected={updateSelected}
+                        ></ThisTableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </TableContainer>
+            </div>
+          )}
+        </div>
       </div>
       <GlobalSnackbar
         open={

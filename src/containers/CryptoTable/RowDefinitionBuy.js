@@ -1,15 +1,15 @@
 export default [
   {
     field: "p",
-    label: "Buy Price",
-    width: "20%",
+    label: "Price",
+    width: "50%",
     align: "left",
     placement: "bottom-start",
   },
   {
     field: "q",
-    label: "Buy Quantity",
-    width: "20%",
+    label: "Quantity",
+    width: "50%",
     align: "left",
     useTooltip: true,
     placement: "bottom-start",

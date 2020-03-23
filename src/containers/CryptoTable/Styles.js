@@ -10,6 +10,7 @@ const useStyles = makeStyles(theme => ({
 
   tableAndFabContainer: {
     textAlign: "center",
+    marginRight: "20px",
   },
 
   tableContainer: {

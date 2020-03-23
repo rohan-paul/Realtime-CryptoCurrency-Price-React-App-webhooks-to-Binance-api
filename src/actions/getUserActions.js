@@ -113,10 +113,23 @@ export const getSelectedCurrency = ticker => async dispatch => {
     })
 }
 
-const convertArrToObj = arr => {
+const convertArrToObjBids = arr => {
   return arr
     .filter(item => parseInt(item[1]) !== 0)
     .sort((a, b) => a[0] > b[0])
+    .slice(0, 8)
+    .map(i => {
+      return {
+        p: i[0],
+        q: i[1],
+      }
+    })
+}
+
+const convertArrToObjAsk = arr => {
+  return arr
+    .filter(item => parseInt(item[1]) !== 0)
+    .sort((a, b) => a[0] < b[0])
     .slice(0, 8)
     .map(i => {
       return {
@@ -138,8 +151,8 @@ export const getOrderBook = ticker => async dispatch => {
       type: LOAD_ORDER_BOOK_DATA,
       payload: {
         buyOrder_websocket_connection: orderBook,
-        buy: convertArrToObj(order.b),
-        sell: convertArrToObj(order.a),
+        buy: convertArrToObjBids(order.b),
+        sell: convertArrToObjAsk(order.a),
       },
     })
   }
