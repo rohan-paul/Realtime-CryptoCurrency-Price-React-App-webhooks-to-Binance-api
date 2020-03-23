@@ -117,7 +117,6 @@ const CryptoTable = () => {
       </div>
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className={classes.tableAndFabContainer}>
-          <div>BIDS</div>
           {globalStore.loading ? (
             <div className={classes.spinner}>
               <LoadingSpinner />
@@ -125,6 +124,7 @@ const CryptoTable = () => {
           ) : (
             <div>
               <TableToolbar selected={selected} />
+              <div>BIDS</div>
               <TableContainer className={classes.tableContainer}>
                 <div className={classes.innerTableContainer}>
                   <Table stickyHeader className={classes.table}>
@@ -163,7 +163,6 @@ const CryptoTable = () => {
         </div>
 
         <div className={classes.tableAndFabContainer}>
-          <div>ASKS</div>
           {globalStore.loading ? (
             <div className={classes.spinner}>
               <LoadingSpinner />
@@ -171,6 +170,7 @@ const CryptoTable = () => {
           ) : (
             <div>
               <TableToolbar selected={selected} />
+              <div>ASKS</div>
               <TableContainer className={classes.tableContainer}>
                 <div className={classes.innerTableContainer}>
                   <Table stickyHeader className={classes.table}>

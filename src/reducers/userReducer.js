@@ -63,10 +63,6 @@ export default (state = initialState, actions) => {
       }
 
     case LOAD_ORDER_BOOK_DATA:
-      console.log(
-        "order_book_buy_data",
-        actions.payload.buyOrder_websocket_connection,
-      )
       return {
         ...state,
         loading: false,
