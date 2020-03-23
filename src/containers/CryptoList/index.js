@@ -18,41 +18,6 @@ import Button from "@material-ui/core/Button"
 import { useStyles } from "./Styles"
 import Select from "react-select"
 
-const copyIcon = require("../../assets/images/githublogo.png")
-
-// const IconOption = props => (
-//   <Option {...props}>
-//     <div>
-//       <img src={props.data.image} />
-//     </div>
-//   </Option>
-// )
-
-const currencyList = [
-  {
-    value: "DAI",
-    label: (
-      <div>
-        <img
-          src={copyIcon}
-          height="20px"
-          width="20px"
-          style={{ marginRight: "15px" }}
-        />
-        Chocolate{" "}
-      </div>
-    ),
-  },
-  { value: "ETH", label: "Ethereum" },
-  { value: "CDAI", label: "Compound Dai" },
-  { value: "MATIC", label: "Matic Network" },
-  { value: "USDC", label: "USD Coin" },
-  { value: "SAI", label: "Sai Stablecoin" },
-  { value: "USDT", label: "Tether USD (ERC-20)" },
-  { value: "VRA", label: "Verasity (ERC-20)" },
-  { value: "ZIL", label: "Zilliqa" },
-]
-
 const CryptoList = () => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
@@ -87,7 +52,6 @@ const CryptoList = () => {
               className={classes.selectionBox}
               isClearable
               options={globalStore.currencyList}
-              // options={currencyList}
               getOptionLabel={option => option.label}
               getOptionValue={option => option["value"]}
             />
