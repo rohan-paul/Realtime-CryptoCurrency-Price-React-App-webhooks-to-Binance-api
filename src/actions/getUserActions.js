@@ -7,6 +7,7 @@ import {
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
   LOAD_SELECTED_TICKER_DATA,
+  LOAD_ORDER_BOOK_DATA,
 } from "./types"
 import history from "../history"
 
@@ -110,4 +111,35 @@ export const getSelectedCurrency = ticker => async dispatch => {
         payload: "Error occurred while loading selected ticker Data",
       })
     })
+}
+
+const convertArrToObj = arr => {
+  return arr
+    .filter(item => parseInt(item[1]) !== 0)
+    .sort((a, b) => a[0] > b[0])
+    .slice(0, 8)
+    .map(i => {
+      return {
+        p: i[0],
+        q: i[1],
+      }
+    })
+}
+
+export const getOrderBook = ticker => async dispatch => {
+  const url = `wss://stream.binance.com:9443/ws/${ticker}btc@depth`
+
+  let orderBook = new WebSocket(url)
+
+  orderBook.onmessage = event => {
+    const order = JSON.parse(event.data)
+
+    dispatch({
+      type: LOAD_ORDER_BOOK_DATA,
+      payload: {
+        buy: convertArrToObj(order.b),
+        sell: convertArrToObj(order.a),
+      },
+    })
+  }
 }

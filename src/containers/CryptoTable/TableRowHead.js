@@ -9,6 +9,7 @@ import TableSortLabel from "@material-ui/core/TableSortLabel"
 import Checkbox from "@material-ui/core/Checkbox"
 import Typography from "@material-ui/core/Typography"
 import RowDefinition from "./RowDefinition"
+import RowDefinitionBuy from "./RowDefinitionBuy"
 
 const useStyles = makeStyles({
   checkboxContainer: {
@@ -29,6 +30,7 @@ const TableRowHead = ({
   order,
   onOrderChange,
   setSelected,
+  isBuySell,
 }) => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
@@ -39,6 +41,8 @@ const TableRowHead = ({
     selectedCurrencies.length > 0 &&
     selectedCurrencies.length === selected.length
   const selectAll = () => setSelected(checked ? [] : [...selectedCurrencies])
+
+  const RowDefinitionToRender = isBuySell ? RowDefinitionBuy : RowDefinition
 
   return (
     <TableHead>
@@ -53,7 +57,7 @@ const TableRowHead = ({
             color="primary"
           />
         </TableCell>
-        {RowDefinition.map(
+        {RowDefinitionToRender.map(
           row => (
             <TableCell
               component="th"

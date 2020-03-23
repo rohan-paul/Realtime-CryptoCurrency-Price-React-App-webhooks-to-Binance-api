@@ -11,11 +11,18 @@ import TableBody from "@material-ui/core/TableBody"
 import { orderBy } from "lodash"
 import LoadingSpinner from "../../components_libs/LoadingSpinner"
 import TableRowHead from "./TableRowHead"
-import TableRow from "./ThisTableRow"
+import ThisTableRow from "./ThisTableRow"
 import TableToolbar from "./TableToolbar"
 import { useStyles } from "./Styles"
 import GlobalSnackbar from "../../components_libs/GlobalSnackbar"
 import { handleSnackBarStatus } from "../../actions/getUserActions"
+
+const buyOrder = [
+  { p: "0.02091900", q: "4.00000000" },
+  { p: "0.02092100", q: "6.79200000" },
+  { p: "0.02092200", q: "1.21000000" },
+  { p: "0.02092300", q: "4.00000000" },
+]
 
 const CryptoTable = () => {
   const globalStore = useSelector(state => state.globalStore)
@@ -54,6 +61,7 @@ const CryptoTable = () => {
 
   // this useEffect is only to close the websocket connection when component unmounts
   useEffect(() => {
+    // first store the websocket value in ref.current when component mounts
     webSocket.current = globalStore.current_websocket_connection
     return () => {
       if (webSocket.current) {
@@ -89,7 +97,7 @@ const CryptoTable = () => {
                       [order.field],
                       [order.direction],
                     ).map(thisItem => (
-                      <TableRow
+                      <ThisTableRow
                         key={thisItem.pair}
                         thisItem={thisItem}
                         selectedItems={selected.filter(
@@ -97,8 +105,7 @@ const CryptoTable = () => {
                         )}
                         selected={isSelected(thisItem)}
                         onSelected={updateSelected}
-                        key={thisItem._id || thisItem.name}
-                      ></TableRow>
+                      ></ThisTableRow>
                     ))}
                   </TableBody>
                 </Table>
@@ -106,18 +113,108 @@ const CryptoTable = () => {
             </TableContainer>
           </div>
         )}
-        <GlobalSnackbar
-          open={
-            globalStore.snackbar ||
-            typeof globalStore.snackbar === "object" ||
-            typeof globalStore.snackbar === "string" ||
-            globalStore.snackbar instanceof String
-          }
-          variant="error"
-          message={globalStore.error_while_fetching_initial_currency_list}
-          onClose={closeSnackbar}
-        />
       </div>
+      <div>BUY</div>
+      <div className={classes.tableAndFabContainer}>
+        {globalStore.loading ? (
+          <div className={classes.spinner}>
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div>
+            <TableToolbar selected={selected} />
+            <TableContainer className={classes.tableContainer}>
+              <div className={classes.innerTableContainer}>
+                <Table stickyHeader className={classes.table}>
+                  <TableRowHead
+                    isBuySell
+                    selectedCurrencies={globalStore.order_book_buy_data}
+                    selected={selected}
+                    order={order}
+                    onOrderChange={onOrderChange}
+                    setSelected={setSelected}
+                  />
+
+                  <TableBody>
+                    {orderBy(
+                      globalStore.order_book_buy_data,
+                      [order.field],
+                      [order.direction],
+                    ).map(thisItem => (
+                      <ThisTableRow
+                        isBuySell
+                        key={thisItem.pair}
+                        thisItem={thisItem}
+                        selectedItems={selected.filter(
+                          i => i._id === thisItem._id,
+                        )}
+                        selected={isSelected(thisItem)}
+                        onSelected={updateSelected}
+                      ></ThisTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </TableContainer>
+          </div>
+        )}
+      </div>
+      <div>SELL</div>
+      <div className={classes.tableAndFabContainer}>
+        {globalStore.loading ? (
+          <div className={classes.spinner}>
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div>
+            <TableToolbar selected={selected} />
+            <TableContainer className={classes.tableContainer}>
+              <div className={classes.innerTableContainer}>
+                <Table stickyHeader className={classes.table}>
+                  <TableRowHead
+                    isBuySell
+                    selectedCurrencies={globalStore.order_book_buy_data}
+                    selected={selected}
+                    order={order}
+                    onOrderChange={onOrderChange}
+                    setSelected={setSelected}
+                  />
+
+                  <TableBody>
+                    {orderBy(
+                      globalStore.order_book_buy_data,
+                      [order.field],
+                      [order.direction],
+                    ).map(thisItem => (
+                      <ThisTableRow
+                        isBuySell
+                        key={thisItem.pair}
+                        thisItem={thisItem}
+                        selectedItems={selected.filter(
+                          i => i._id === thisItem._id,
+                        )}
+                        selected={isSelected(thisItem)}
+                        onSelected={updateSelected}
+                      ></ThisTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </TableContainer>
+          </div>
+        )}
+      </div>
+      <GlobalSnackbar
+        open={
+          globalStore.snackbar ||
+          typeof globalStore.snackbar === "object" ||
+          typeof globalStore.snackbar === "string" ||
+          globalStore.snackbar instanceof String
+        }
+        variant="error"
+        message={globalStore.error_while_fetching_initial_currency_list}
+        onClose={closeSnackbar}
+      />
     </div>
   )
 }

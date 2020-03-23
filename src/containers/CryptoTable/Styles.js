@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     borderRadius: theme.shape.borderRadius,
   },
   innerTableContainer: {
-    height: "calc(100vh - 190px)",
+    // height: "calc(100vh - 190px)",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: theme.background.paper,
   },

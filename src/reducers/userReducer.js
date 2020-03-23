@@ -5,6 +5,7 @@ import {
   USER_SELECTED_CURRENCY,
   SNACKBAR_STATUS,
   LOAD_SELECTED_TICKER_DATA,
+  LOAD_ORDER_BOOK_DATA,
 } from "../actions/types"
 
 const initialState = {
@@ -16,6 +17,8 @@ const initialState = {
   selected_ticker_data: [],
   snackbar: false,
   current_websocket_connection: null,
+  order_book_buy_data: [],
+  order_book_sell_data: [],
 }
 
 export default (state = initialState, actions) => {
@@ -56,6 +59,15 @@ export default (state = initialState, actions) => {
         selected_ticker_data: actions.payload.tickerData,
         current_websocket_connection:
           actions.payload.current_websocket_connection,
+      }
+
+    case LOAD_ORDER_BOOK_DATA:
+      console.log("order_book_buy_data", actions.payload)
+      return {
+        ...state,
+        loading: false,
+        order_book_buy_data: actions.payload.buy,
+        order_book_sell_data: actions.payload.sell,
       }
 
     default:

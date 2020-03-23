@@ -13,6 +13,7 @@ import {
   handleUserCurrencySelection,
   handleSnackBarStatus,
   getSelectedCurrency,
+  getOrderBook,
 } from "../../actions/getUserActions"
 import Button from "@material-ui/core/Button"
 import { useStyles } from "./Styles"
@@ -58,6 +59,8 @@ const CryptoList = () => {
             <Button
               onClick={() => {
                 dispatch(getSelectedCurrency(ticker))
+                dispatch(getOrderBook(ticker))
+
                 webSocket.current = globalStore.current_websocket_connection
               }}
               className={classes.button}

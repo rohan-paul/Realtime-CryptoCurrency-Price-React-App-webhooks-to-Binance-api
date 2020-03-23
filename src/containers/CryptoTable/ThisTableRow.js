@@ -14,6 +14,7 @@ import PropTypes from "prop-types"
 import Typography from "@material-ui/core/Typography"
 import TableCellWithTooltip from "./TableCellWithTooltip"
 import RowDefinition from "./RowDefinition"
+import RowDefinitionBuy from "./RowDefinitionBuy"
 
 const useStyles = makeStyles({
   tableCell: {
@@ -28,9 +29,17 @@ const useStyles = makeStyles({
   },
 })
 
-const ThisTableRow = ({ thisItem, selected, onSelected, selectedItems }) => {
+const ThisTableRow = ({
+  thisItem,
+  selected,
+  onSelected,
+  selectedItems,
+  isBuySell,
+}) => {
   const classes = useStyles()
   const globalStore = useSelector(state => state.globalStore)
+
+  const RowDefinitionToRender = isBuySell ? RowDefinitionBuy : RowDefinition
 
   return (
     <TableRow
@@ -49,7 +58,7 @@ const ThisTableRow = ({ thisItem, selected, onSelected, selectedItems }) => {
           key={`${thisItem._id}checkbox`}
         />
       </TableCell>
-      {RowDefinition.map(row => {
+      {RowDefinitionToRender.map(row => {
         const value = row.valueFunction
           ? row.valueFunction(thisItem)
           : Array.isArray(thisItem[row.field])
