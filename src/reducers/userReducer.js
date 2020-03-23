@@ -17,6 +17,7 @@ const initialState = {
   selected_ticker_data: [],
   snackbar: false,
   current_websocket_connection: null,
+  buyOrder_websocket_connection: null,
   order_book_buy_data: [],
   order_book_sell_data: [],
 }
@@ -62,10 +63,15 @@ export default (state = initialState, actions) => {
       }
 
     case LOAD_ORDER_BOOK_DATA:
-      console.log("order_book_buy_data", actions.payload)
+      console.log(
+        "order_book_buy_data",
+        actions.payload.buyOrder_websocket_connection,
+      )
       return {
         ...state,
         loading: false,
+        buyOrder_websocket_connection:
+          actions.payload.buyOrder_websocket_connection,
         order_book_buy_data: actions.payload.buy,
         order_book_sell_data: actions.payload.sell,
       }

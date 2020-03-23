@@ -137,6 +137,7 @@ export const getOrderBook = ticker => async dispatch => {
     dispatch({
       type: LOAD_ORDER_BOOK_DATA,
       payload: {
+        buyOrder_websocket_connection: orderBook,
         buy: convertArrToObj(order.b),
         sell: convertArrToObj(order.a),
       },

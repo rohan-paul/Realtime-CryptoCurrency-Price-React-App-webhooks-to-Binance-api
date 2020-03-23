@@ -17,13 +17,6 @@ import { useStyles } from "./Styles"
 import GlobalSnackbar from "../../components_libs/GlobalSnackbar"
 import { handleSnackBarStatus } from "../../actions/getUserActions"
 
-const buyOrder = [
-  { p: "0.02091900", q: "4.00000000" },
-  { p: "0.02092100", q: "6.79200000" },
-  { p: "0.02092200", q: "1.21000000" },
-  { p: "0.02092300", q: "4.00000000" },
-]
-
 const CryptoTable = () => {
   const globalStore = useSelector(state => state.globalStore)
   const dispatch = useDispatch()
@@ -35,6 +28,7 @@ const CryptoTable = () => {
   })
   const [selected, setSelected] = useState([])
   const webSocket = useRef(null)
+  const buyOrderWebSocket = useRef(null)
 
   const closeSnackbar = () => dispatch(handleSnackBarStatus(false))
 
@@ -63,12 +57,19 @@ const CryptoTable = () => {
   useEffect(() => {
     // first store the websocket value in ref.current when component mounts
     webSocket.current = globalStore.current_websocket_connection
+    buyOrderWebSocket.current = globalStore.buyOrder_websocket_connection
     return () => {
       if (webSocket.current) {
         webSocket.current.close()
+        if (buyOrderWebSocket.current) {
+          buyOrderWebSocket.current.close()
+        }
       }
     }
-  }, [globalStore.current_websocket_connection])
+  }, [
+    globalStore.buyOrder_websocket_connection,
+    globalStore.current_websocket_connection,
+  ])
 
   return (
     <div className={classes.container}>
