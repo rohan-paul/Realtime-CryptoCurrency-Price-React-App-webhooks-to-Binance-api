@@ -1,3 +1,5 @@
+#### This was a 12 hour Take Home Exercise that I did in 1-st quarter in 2020
+
 ##### The LIVE site running [here](https://realtime-cryptocurrency-price.netlify.com/)
 
 Its built with React, Redux and Material-UI.
